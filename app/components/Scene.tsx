@@ -138,19 +138,19 @@ const Scene = () => {
    useGSAP(() => {
       tl.current = gsap.timeline({ paused: true, repeat: -1 })
       tl.current
+         // * One rotation
          .add("first")
          .to({ value: 0 }, {
-            value: 1,
-            duration: 2,
+            value: 0.5,
+            duration: 0.5,
             ease: "power2.inOut",
             onUpdate: function () {
                twistCross(this.targets()[0].value);
             }
          }, "first")
-         .add("second")
          .to({ value: 0 }, {
             value: Math.PI, // Math.PI
-            duration: 2,
+            duration: 1,
             ease: "power2.inOut",
             onUpdate: function () {
                rotateModelOnAxis(new THREE.Vector3(1, 1, 0).normalize(), this.targets()[0].value);
@@ -161,15 +161,49 @@ const Scene = () => {
                   prevRotation.current = meshRef.current.rotation.clone();
                }
             }
-         }, "second")
-         .to({ value: 1 }, {
+         }, "first")
+         .to({ value: 0.5 }, {
             value: 0,
-            duration: 2,
+            delay: 0.5,
+            duration: 0.5,
             ease: "power2.inOut",
             onUpdate: function () {
                twistCross(this.targets()[0].value);
             }
-         }, "second")
+         }, "first")
+      //  * Two rotations
+      // .add("first")
+      // .to({ value: 0 }, {
+      //    value: 1,
+      //    duration: 0.5,
+      //    ease: "power2.inOut",
+      //    onUpdate: function () {
+      //       twistCross(this.targets()[0].value);
+      //    }
+      // }, "first")
+      // .to({ value: 0 }, {
+      //    value: Math.PI * 2, // Math.PI
+      //    duration: 1,
+      //    ease: "power2.inOut",
+      //    onUpdate: function () {
+      //       rotateModelOnAxis(new THREE.Vector3(1, 1, 0).normalize(), this.targets()[0].value);
+      //    },
+      //    onComplete: function () {
+      //       if (meshRef.current) {
+      //          // Store a copy of the current position
+      //          prevRotation.current = meshRef.current.rotation.clone();
+      //       }
+      //    }
+      // }, "first")
+      // .to({ value: 1 }, {
+      //    value: 0,
+      //    delay: 0.5,
+      //    duration: 0.5,
+      //    ease: "power2.inOut",
+      //    onUpdate: function () {
+      //       twistCross(this.targets()[0].value);
+      //    }
+      // }, "first")
       tl.current.play()
    })
 
@@ -182,7 +216,7 @@ const Scene = () => {
          {/* <directionalLight intensity={0.7} decay={2} rotation={[-0.506, 0.629, 0.756]} /> */}
          <mesh ref={meshRef} geometry={mergedGeometry!} castShadow receiveShadow>
             {/* <boxGeometry /> */}
-            <meshStandardMaterial wireframe roughness={0.05} color={"#000000"} />
+            <meshStandardMaterial roughness={0.05} color={"#000000"} />
          </mesh>
          {/* <ambientLight intensity={100} /> */}
          <Environment preset='warehouse' />
