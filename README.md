@@ -1,3 +1,6 @@
+# Recreation of Yuri Artiukh twist animation
+![Снимок экрана 2025-06-26 133913](https://github.com/user-attachments/assets/edc2d60c-526d-4357-854c-29293e542fb5)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
